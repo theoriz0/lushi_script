@@ -1075,16 +1075,12 @@ class Agent:
         while True:
             if (rect is not None) and (self.locs.empty is not None):
                 self.new_click(tuple_add(rect, self.locs.empty))
-            else :
+            else:
                 # 不知为啥，最近开始报这个错误
                 screenshot(self.title, 'restart_ract_noe')
                 if self.basic.auto_restart:
                     restart_game(self.lang, self.basic.bn_path)
             if time.time() - tic > self.basic.longest_waiting:
-                if self.basic.screenshot_error:
-                    screenshot(self.title, 'restart_block')
-                    if self.basic.auto_restart:
-                        restart_game(self.lang, self.basic.bn_path)
                 if state == 'not_ready_dots' or state == 'member_not_ready' or state == 'member_not_ready2':
                     pyautogui.rightClick(tuple_add(rect, self.locs.empty))
                     self.new_click(tuple_add(rect, self.locs.options))
@@ -1094,7 +1090,8 @@ class Agent:
                     self.new_click(tuple_add(rect, self.locs.give_up))
                     self.new_click(tuple_add(rect, self.locs.give_up_cfm))
                 else:
-                    screenshot(self.title, 'restart_unkown')
+                    if self.basic.screenshot_error:
+                        screenshot(self.title, 'restart_unknown')
                     if self.basic.auto_restart:
                         restart_game(self.lang, self.basic.bn_path)
                 tic = time.time()
