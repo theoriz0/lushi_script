@@ -299,10 +299,15 @@ class Agent:
                     for x in self.locs.tasks_x:
                         # do task
                         self.new_click(tuple_add(rect, (x, y)))
+                        time.sleep(0.5)
                         self.new_click(tuple_add(rect, self.locs.tasks_abandon))
+                        time.sleep(0.5)
                         self.new_click(tuple_add(rect, self.locs.tasks_abandon_cancel))
+                        time.sleep(0.5)
                         self.new_click(tuple_add(rect, self.locs.tasks_abandon_cancel))
+                        time.sleep(0.5)
                         self.new_click(tuple_add(rect, self.locs.campfire_exit))
+                        time.sleep(0.5)
 
             # exit the campfire
             self.new_click(tuple_add(rect, self.locs.empty))
@@ -688,10 +693,15 @@ class Agent:
                 for x in self.locs.tasks_x:
                     # do task
                     self.new_click(tuple_add(rect, (x, y)))
+                    time.sleep(0.5)
                     self.new_click(tuple_add(rect, self.locs.tasks_abandon))
+                    time.sleep(0.5)
                     self.new_click(tuple_add(rect, self.locs.tasks_abandon_cancel))
+                    time.sleep(0.5)
                     self.new_click(tuple_add(rect, self.locs.tasks_abandon_cancel))
+                    time.sleep(0.5)
                     self.new_click(tuple_add(rect, self.locs.campfire_exit))
+                    time.sleep(0.5)
 
         # exit the campfire
         self.new_click(tuple_add(rect, self.locs.empty))
