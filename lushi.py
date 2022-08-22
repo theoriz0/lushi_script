@@ -127,6 +127,7 @@ class Agent:
         self.stop_at_boss = self.basic.stop_at_boss
         self.fix_x = self.basic.fix_x
         self.fix_y = self.basic.fix_y
+        self.debug = self.basic.debug
         self.lettuce_role_limit = int(self.basic.lettuce_role_limit)
         self.map_decision = self.basic.map_decision
         if self.map_decision is None or self.map_decision == '':
