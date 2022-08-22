@@ -875,15 +875,15 @@ class Agent:
                             if success:
                                 battle_idx.append(i)
                             i += 1
-                        i = 0
-                        for v_loc in circles[0, :]:  # 遍历矩阵每一行的数据
-                            if i not in battle_idx or 1 < len(battle_idx):
-                                cur_loc = [0, 0]
-                                cur_loc[1] = v_loc[1] + the_map_loc[1]  # sub image y ++
-                                cur_loc[0] = v_loc[0] + the_map_loc[0]
-                                self.new_click(tuple_add(rect, cur_loc))
-                                break
-                            i += 1
+                        # i = 0
+                        # for v_loc in circles[0, :]:  # 遍历矩阵每一行的数据
+                        #     if i not in battle_idx or 1 < len(battle_idx):
+                        #         cur_loc = [0, 0]
+                        #         cur_loc[1] = v_loc[1] + the_map_loc[1]  # sub image y ++
+                        #         cur_loc[0] = v_loc[0] + the_map_loc[0]
+                        #         self.new_click(tuple_add(rect, cur_loc))
+                        #         break
+                        #     i += 1
 
                 else:  # 兜底action
                     first_x, mid_x, last_x, y = self.locs.focus
