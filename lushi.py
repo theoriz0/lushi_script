@@ -1101,6 +1101,8 @@ class Agent:
             for state_text in self.states:
                 success, tic, state, rect = self.state_handler(state, tic, state_text)
                 if success:
+                    if self.debug:
+                        logger.info(f'state {state} detected, clicking {self.locs.empty}')
                     self.new_click(tuple_add(rect, self.locs.empty))
 
 
