@@ -904,6 +904,7 @@ class Agent:
 
             if state in ['goto', 'show', 'teleport', 'start_game']:
                 logger.info(f'find {state}, try to click')
+                need_stop = False
                 if self.stop_at_boss:
                     # 检查是否进入boss关卡
                     success, loc, rect = self.check_in_screen("final_boss")
@@ -915,8 +916,9 @@ class Agent:
                         circles = get_burning_green_circles(screen, 55, 110)
                         if 1 > len(circles):
                             print(f"[{state}]  stop at boss")
+                            need_stop = True
                             time.sleep(30)
-                else:
+                if not need_stop:
                     self.new_click(tuple_add(rect, self.locs.start_game))
 
             if state in ['member_not_ready', 'member_not_ready2']:
