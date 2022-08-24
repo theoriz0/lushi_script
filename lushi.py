@@ -902,6 +902,12 @@ class Agent:
 
                     for x in (x1, x2, x3):
                         self.new_click(tuple_add(rect, (x, y)))
+                logger.info('way choosen, wait for campfire')
+                time.sleep(5)
+                enter_campfire, _, _ = self.check_in_screen('campfire')
+                if enter_campfire:
+                    logger.info('campfire auto pop up, now handle finished task')
+                    self.submit_campfire_mission(rect)
 
             if state in ['goto', 'show', 'teleport', 'start_game']:
                 logger.info(f'find {state}, try to click')
