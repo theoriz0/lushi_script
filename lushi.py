@@ -601,87 +601,87 @@ class Agent:
 
         return [0, 1, 2]  # 兜底返回
 
-    # 从按照黑名单剔除宝藏，返回可选项，如果没有则返回[0], 最多返回：[0,1,2]
-    # def pick_treasure(self, screen):
-    #     advice_idx = []
-    #     not_advice_idx = []
-    #     for key in self.treasure_blacklist.keys():
-    #         for idx in range(3):
-    #             loc = self.locs.treasures_location[idx]
-    #             one_treasure = get_sub_np_array(screen, loc[0], loc[1], loc[2], loc[3])
-    #             success, X, Y, conf = find_icon_location(one_treasure, self.treasure_blacklist[key],
-    #                                                      self.basic.confidence)
-    #             if success and idx not in not_advice_idx:
-    #                 not_advice_idx.append(idx)
-    #                 if 1 < len(not_advice_idx):
-    #                     break
-    #         if 1 < len(not_advice_idx):
-    #             break
+    从按照黑名单剔除宝藏，返回可选项，如果没有则返回[0], 最多返回：[0,1,2]
+    def pick_treasure(self, screen):
+        advice_idx = []
+        not_advice_idx = []
+        for key in self.treasure_blacklist.keys():
+            for idx in range(3):
+                loc = self.locs.treasures_location[idx]
+                one_treasure = get_sub_np_array(screen, loc[0], loc[1], loc[2], loc[3])
+                success, X, Y, conf = find_icon_location(one_treasure, self.treasure_blacklist[key],
+                                                         self.basic.confidence)
+                if success and idx not in not_advice_idx:
+                    not_advice_idx.append(idx)
+                    if 1 < len(not_advice_idx):
+                        break
+            if 1 < len(not_advice_idx):
+                break
 
-    #     logger.info(f'find treasure blacklist: {not_advice_idx}')
-    #     if 2 < len(not_advice_idx) or 1 > len(not_advice_idx):
-    #         return [0, 1, 2]
-    #     else:
-    #         for idx in range(3):
-    #             if idx not in not_advice_idx:
-    #                 advice_idx.append(idx)
-    #         return advice_idx
+        logger.info(f'find treasure blacklist: {not_advice_idx}')
+        if 2 < len(not_advice_idx) or 1 > len(not_advice_idx):
+            return [0, 1, 2]
+        else:
+            for idx in range(3):
+                if idx not in not_advice_idx:
+                    advice_idx.append(idx)
+            return advice_idx
 
-    # # 按照黑白名单选择神秘人选项，白名单命中，则选白名单的。黑名单命中则不选，如果白名单没命中，黑名单全命中，则随机选
-    # def pick_visitor(self, screen):
-    #     is_in_whitelist = False
-    #     is_in_blacklist = False
-    #     idx_white_list = []
-    #     idx_black_list = []
-    #     for key in self.heros_whitelist.keys():
-    #         success, loc, conf = self.find_in_image(screen, key, prefix='heros_whitelist')
-    #         if success:
-    #             is_in_whitelist = True
-    #             dist = 1024
-    #             the_index = 0
-    #             for idx, v_loc in self.locs.visitors_location.items():
-    #                 new_dist = abs(loc[0] - v_loc[2])
-    #                 if new_dist < dist:  # right_x - right_x
-    #                     the_index = idx
-    #                     dist = new_dist
+    # 按照黑白名单选择神秘人选项，白名单命中，则选白名单的。黑名单命中则不选，如果白名单没命中，黑名单全命中，则随机选
+    def pick_visitor(self, screen):
+        is_in_whitelist = False
+        is_in_blacklist = False
+        idx_white_list = []
+        idx_black_list = []
+        for key in self.heros_whitelist.keys():
+            success, loc, conf = self.find_in_image(screen, key, prefix='heros_whitelist')
+            if success:
+                is_in_whitelist = True
+                dist = 1024
+                the_index = 0
+                for idx, v_loc in self.locs.visitors_location.items():
+                    new_dist = abs(loc[0] - v_loc[2])
+                    if new_dist < dist:  # right_x - right_x
+                        the_index = idx
+                        dist = new_dist
 
-    #             idx_white_list.append(the_index)
+                idx_white_list.append(the_index)
 
-    #     # 去重
-    #     idx_white_list = list(set(idx_white_list))
-    #     if is_in_whitelist and 0 < len(idx_white_list):
-    #         logger.info(f'find visitor white list {idx_white_list}')
-    #         return idx_white_list
+        # 去重
+        idx_white_list = list(set(idx_white_list))
+        if is_in_whitelist and 0 < len(idx_white_list):
+            logger.info(f'find visitor white list {idx_white_list}')
+            return idx_white_list
 
-    #     for key in self.heros_blacklist.keys():
-    #         success, loc, conf = self.find_in_image(screen, key, prefix='heros_blacklist')
-    #         if success:
-    #             is_in_blacklist = True
-    #             dist = 1024
-    #             the_index = 0
-    #             for idx, v_loc in self.locs.visitors_location.items():
-    #                 new_dist = abs(loc[0] - v_loc[2])
-    #                 if new_dist < dist:  # right_x - right_x
-    #                     the_index = idx
-    #                     dist = new_dist
+        for key in self.heros_blacklist.keys():
+            success, loc, conf = self.find_in_image(screen, key, prefix='heros_blacklist')
+            if success:
+                is_in_blacklist = True
+                dist = 1024
+                the_index = 0
+                for idx, v_loc in self.locs.visitors_location.items():
+                    new_dist = abs(loc[0] - v_loc[2])
+                    if new_dist < dist:  # right_x - right_x
+                        the_index = idx
+                        dist = new_dist
 
-    #             idx_black_list.append(the_index)
+                idx_black_list.append(the_index)
 
-    #     # 去重
-    #     idx_black_list = list(set(idx_black_list))
+        # 去重
+        idx_black_list = list(set(idx_black_list))
 
-    #     if is_in_blacklist:
-    #         logger.info(f'find visitor black list {idx_black_list}')
-    #         if 2 < len(idx_black_list) or 1 > len(idx_black_list):
-    #             return [0, 1, 2]
-    #         else:
-    #             advice_idx = []
-    #             for idx in range(3):
-    #                 if idx not in idx_black_list:
-    #                     advice_idx.append(idx)
-    #             return advice_idx
+        if is_in_blacklist:
+            logger.info(f'find visitor black list {idx_black_list}')
+            if 2 < len(idx_black_list) or 1 > len(idx_black_list):
+                return [0, 1, 2]
+            else:
+                advice_idx = []
+                for idx in range(3):
+                    if idx not in idx_black_list:
+                        advice_idx.append(idx)
+                return advice_idx
 
-    #     return [0, 1, 2]  # 兜底返回
+        return [0, 1, 2]  # 兜底返回
 
     def submit_campfire_mission(self, rect):
         logger.info("campfire dialog")
