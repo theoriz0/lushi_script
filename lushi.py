@@ -584,7 +584,7 @@ class Agent:
 
         return [0, 1, 2]  # 兜底返回
 
-    从按照黑名单剔除宝藏，返回可选项，如果没有则返回[0], 最多返回：[0,1,2]
+    # 从按照黑名单剔除宝藏，返回可选项，如果没有则返回[0], 最多返回：[0,1,2]
     def pick_treasure(self, screen):
         advice_idx = []
         not_advice_idx = []
