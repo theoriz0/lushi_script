@@ -740,10 +740,13 @@ class Agent:
                     self.new_click(tuple_add(rect, loc))
                     self.new_click(tuple_add(rect, self.locs.start_game))
                 elif the_boss_id > 5:
-                    id_standard = (the_boss_id - 6) * 2
-                    x_id = id_standard % 3
-                    y_id = id_standard // 3
-                    loc = (self.locs.boss[x_id], self.locs.boss[3 + y_id])
+                    if the_boss_id == 8:
+                        loc = (556,598)
+                    else:
+                        id_standard = (the_boss_id - 6) * 2
+                        x_id = id_standard % 3
+                        y_id = id_standard // 3
+                        loc = (self.locs.boss[x_id], self.locs.boss[3 + y_id])
 
                     self.new_click(tuple_add(rect, self.locs.boss_page_left))
                     time.sleep(0.5)
