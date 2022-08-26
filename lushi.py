@@ -293,28 +293,9 @@ class Agent:
             self.new_click(tuple_add(rect, self.locs.campfire))
             # pyautogui.click(tuple_add(rect, self.locs.start_game)) # 新版本不需要点这一下了
             # check if a task finish
-            time.sleep(1)
-            _, img = find_lushi_window(self.title, to_gray=False, raw=True)
-            lines = get_burning_blue_lines(img)
-            if None is not lines and 0 < len(lines):
-                logger.info("some task finished ... ")
-                for y in self.locs.tasks_y:
-                    for x in self.locs.tasks_x:
-                        # do task
-                        self.new_click(tuple_add(rect, (x, y)))
-                        time.sleep(0.5)
-                        self.new_click(tuple_add(rect, self.locs.tasks_abandon))
-                        time.sleep(0.5)
-                        self.new_click(tuple_add(rect, self.locs.tasks_abandon_cancel))
-                        time.sleep(0.5)
-                        self.new_click(tuple_add(rect, self.locs.tasks_abandon_cancel))
-                        time.sleep(0.5)
-                        self.new_click(tuple_add(rect, self.locs.campfire_exit))
-                        time.sleep(0.5)
+            self.submit_campfire_mission(rect)
 
-            # exit the campfire
-            self.new_click(tuple_add(rect, self.locs.empty))
-            # select first first boss of map
+            # select first boss of map
             self.new_click(tuple_add(rect, self.locs.first_boss))
 
     def start_battle(self, rect, battle_boss=False):
