@@ -21,3 +21,5 @@ PyQt5
 pinyin
 keyboard
 imutils
+python-dotenv
+grequests
