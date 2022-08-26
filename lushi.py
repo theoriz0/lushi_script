@@ -41,6 +41,8 @@ class Agent:
             raise ValueError(f"Language {cfg['lang']} is not supported yet")
 
         self.debug = False  # TODO check before commit, 什么时候把这个也做到按钮里
+        self.notification_sound = True
+        self.notification_bark = False
         self.icons = {}
         self.treasure_whitelist = {}
         self.treasure_blacklist = {}
@@ -690,6 +692,8 @@ class Agent:
         lines = get_burning_blue_lines(img)
         if None is not lines and 0 < len(lines):
             logger.info("some task finished ... ")
+            if self.notification_sound:
+                os.system('resource\\notification_sound.mp3')
             for y in self.locs.tasks_y:
                 for x in self.locs.tasks_x:
                     # do task
@@ -924,6 +928,8 @@ class Agent:
                         if 1 > len(circles):
                             print(f"[{state}]  stop at boss")
                             need_stop = True
+                            if self.notification_sound:
+                                os.system('resource\\notification_sound.mp3')
                             time.sleep(30)
                 if not need_stop:
                     self.new_click(tuple_add(rect, self.locs.start_game))
@@ -1122,6 +1128,7 @@ def run_from_gui(cfg):
         lang = None
     restart_game(lang, cfg['bn_path'], kill_existing=False)
     agent = Agent(cfg=cfg)
+    os.system('resource\\notification_sound.mp3')
     agent.run()
 
 
