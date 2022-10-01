@@ -15,6 +15,7 @@ from PIL import Image
 from types import SimpleNamespace
 
 from utils.log_util import LogUtil
+from utils.notify import send_bark_notification
 from utils.util import BOSS_ID_MAP, find_lushi_window, find_icon_location, find_enemy_location, restart_game, tuple_add, find_relative_loc, \
     screenshot, find_lushi_raw_window, get_hero_color_by_id
 from utils.images import get_sub_np_array, get_burning_green_circles, get_burning_blue_lines, get_burning_blue_lines, \
@@ -992,6 +993,10 @@ class Agent:
                 self.surprise_relative_loc = None  # 漩涡已选择
 
             if state == 'visitor_list':
+                if self.notification_sound:
+                    os.system('resource\\notification_sound.mp3')
+                    send_bark_notification(None, "Visitor arrived!")
+                    time.sleep(30)
                 logger.info(f'find {state}, try to click')
                 _, screen = find_lushi_window(self.title)
                 # advice = self.pick_visitor(screen)
